@@ -30,7 +30,7 @@ internal class OrderDao(IDataContext<SqlConnection> dataContext) : BaseDao<SqlCo
         // Create order
 
         using SqlConnection connection = DataContext.Open();
-        using SqlTransaction transaction = connection.BeginTransaction();
+        using SqlTransaction transaction = connection.BeginTransaction(); // Default isolationlevel -> ReadCommitted
 
         try
         {
@@ -139,7 +139,7 @@ internal class OrderDao(IDataContext<SqlConnection> dataContext) : BaseDao<SqlCo
     public bool Update(Order entity)
     {
         using SqlConnection connection = DataContext.Open();
-        using SqlTransaction transaction = connection.BeginTransaction();
+        using SqlTransaction transaction = connection.BeginTransaction(IsolationLevel.RepeatableRead);
 
         try
         {
