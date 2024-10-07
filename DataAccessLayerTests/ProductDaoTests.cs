@@ -23,13 +23,33 @@ namespace DataAccessLayerTests
         public void ReadAllProductsTest()
         {
             IEnumerable<Product> products = _dao.Read();
+
             Assert.That(products, Is.Not.Null);
         }
 
         [Test]
-        public void UpdateProductShouldShowExceptionTest()
+        public void UpdateProductSuccessTest()
         {
-            Assert.Throws<NotImplementedException>(() => _dao.Update(new Product() { Id = 1, Name = "Test", Description = "Lorem Ipsum", Price = 4 }));
+            Product testProduct = _dao.Read().First();
+
+            testProduct.Price = 13;
+
+            bool result = _dao.Update(testProduct);
+
+            Assert.That(result, Is.True);
+        }
+
+        [Test]
+        public void UpdateProductFailTest()
+        {
+            Product testProduct = _dao.Read().First();
+
+            testProduct.Price = 19;
+            testProduct.Version[7] = 0;
+
+            bool result = _dao.Update(testProduct);
+
+            Assert.That(result, Is.False);
         }
 
         [Test]

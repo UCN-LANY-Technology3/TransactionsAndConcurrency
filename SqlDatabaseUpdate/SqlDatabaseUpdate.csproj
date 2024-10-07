@@ -16,6 +16,7 @@
 		</ItemGroup>
 
 		<ItemGroup>
+		  <None Remove="scripts\add-product-rowversion.sql" />
 		  <None Remove="Scripts\create-database.sql" />
 		  <None Remove="scripts\insert-master-data.sql" />
 		</ItemGroup>
